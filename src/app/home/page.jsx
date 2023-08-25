@@ -1,7 +1,11 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import React from "react";
 
-const page = () => {
+const home = () => {
+  const pathName = usePathname();
   return <div className="text-4xl text-center mt-[20%]">Hello World</div>;
 };
 
-export default page;
+export default home;
