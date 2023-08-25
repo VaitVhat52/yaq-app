@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { supabase } from "@/client";
+import { CircularProgress } from "@nextui-org/react";
 
 export default function App() {
   const router = useRouter();
@@ -12,6 +13,8 @@ export default function App() {
 
     if (data.session === null) {
       router.push("/login");
+    } else {
+      router.push("/home");
     }
   }
 
@@ -19,5 +22,9 @@ export default function App() {
     session();
   }, []);
 
-  return <div className="text-center mt-[20%]">Hello World</div>;
+  return (
+    <div className="flex justify-center mt-[20%]">
+      <CircularProgress size="lg" aria-label="Loading..." />
+    </div>
+  );
 }
