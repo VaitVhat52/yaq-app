@@ -14,6 +14,7 @@ import Link from "next/link";
 import { Button } from "@nextui-org/button";
 import { supabase } from "@/client";
 import { useRouter, usePathname } from "next/navigation";
+import { FcElectricalSensor } from "react-icons/fc";
 
 const Header = () => {
   const router = useRouter();
@@ -55,6 +56,10 @@ const Header = () => {
       setHomeSelected(false);
       setBlogSelected(false);
       setTodoSelected(true);
+    } else {
+      setHomeSelected(false);
+      setBlogSelected(false);
+      setTodoSelected(false);
     }
   });
 
