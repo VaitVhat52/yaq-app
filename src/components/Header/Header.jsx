@@ -13,13 +13,16 @@ import {
 import Link from "next/link";
 import { Button } from "@nextui-org/button";
 import { supabase } from "@/client";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 const Header = () => {
   const router = useRouter();
+  const pathName = usePathname();
   const [sessionState, setSessionState] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const [homeSelected, setHomeSelected] = useState(false);
+  const [blogSelected, setBlogSelected] = useState(false);
+  const [todoSelected, setTodoSelected] = useState(false);
   const menuItems = ["Home", "Blog", "To Do"];
 
   async function logout() {
@@ -38,6 +41,22 @@ const Header = () => {
       setSessionState(true);
     }
   }
+
+  useEffect(() => {
+    if (pathName === "/home") {
+      setHomeSelected(true);
+      setBlogSelected(false);
+      setBlogSelected(false);
+    } else if (pathName === "/blog") {
+      setHomeSelected(false);
+      setBlogSelected(true);
+      setTodoSelected(false);
+    } else if (pathName === "/todo") {
+      setHomeSelected(false);
+      setBlogSelected(false);
+      setTodoSelected(true);
+    }
+  });
 
   useEffect(() => {
     session();
@@ -62,20 +81,14 @@ const Header = () => {
         </NavbarBrand>
       </NavbarContent>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Home
-          </Link>
+        <NavbarItem isActive={homeSelected}>
+          <Link href="/home">Home</Link>
         </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Blog
-          </Link>
+        <NavbarItem isActive={blogSelected}>
+          <Link href="/blog">Blog</Link>
         </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            To Do
-          </Link>
+        <NavbarItem isActive={todoSelected}>
+          <Link href="/todo">To Do</Link>
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">

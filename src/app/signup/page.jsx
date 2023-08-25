@@ -19,7 +19,7 @@ async function googleAuth() {
   });
 }
 
-export default function SignUp() {
+export default function signup() {
   return (
     <div className="container mx-auto my-[7%]">
       <h1 className="text-4xl text-center my-10">Create New Account</h1>
