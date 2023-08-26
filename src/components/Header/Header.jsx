@@ -14,22 +14,32 @@ import Link from "next/link";
 import { Button } from "@nextui-org/button";
 import { supabase } from "@/client";
 import { useRouter, usePathname } from "next/navigation";
-import { FcElectricalSensor } from "react-icons/fc";
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+  Avatar,
+} from "@nextui-org/react";
 
 const Header = () => {
   const router = useRouter();
   const pathName = usePathname();
   const [sessionState, setSessionState] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [homeSelected, setHomeSelected] = useState(false);
-  const [blogSelected, setBlogSelected] = useState(false);
-  const [todoSelected, setTodoSelected] = useState(false);
+  const [navSelected, setNavSelected] = useState("");
+  const [profile, setProfile] = useState("");
+
   const menuItems = ["Home", "Blog", "To Do"];
 
   async function logout() {
     const { error } = await supabase.auth.signOut();
     session();
+    setIsMenuOpen(false);
     router.push("/login");
+  }
+
+  function navMenuRoute() {
     setIsMenuOpen(false);
   }
 
@@ -40,27 +50,16 @@ const Header = () => {
       setSessionState(false);
     } else {
       setSessionState(true);
+      console.log(data.session);
     }
+
+    setProfile(
+      !data.session ? null : data.session.user.user_metadata.avatar_url
+    );
   }
 
   useEffect(() => {
-    if (pathName === "/home") {
-      setHomeSelected(true);
-      setBlogSelected(false);
-      setBlogSelected(false);
-    } else if (pathName === "/blog") {
-      setHomeSelected(false);
-      setBlogSelected(true);
-      setTodoSelected(false);
-    } else if (pathName === "/todo") {
-      setHomeSelected(false);
-      setBlogSelected(false);
-      setTodoSelected(true);
-    } else {
-      setHomeSelected(false);
-      setBlogSelected(false);
-      setTodoSelected(false);
-    }
+    setNavSelected(pathName.split("/")[1].toLowerCase());
   });
 
   useEffect(() => {
@@ -86,13 +85,13 @@ const Header = () => {
         </NavbarBrand>
       </NavbarContent>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem isActive={homeSelected}>
+        <NavbarItem isActive={navSelected === "home"}>
           <Link href="/home">Home</Link>
         </NavbarItem>
-        <NavbarItem isActive={blogSelected}>
+        <NavbarItem isActive={navSelected === "blog"}>
           <Link href="/blog">Blog</Link>
         </NavbarItem>
-        <NavbarItem isActive={todoSelected}>
+        <NavbarItem isActive={navSelected === "todo"}>
           <Link href="/todo">To Do</Link>
         </NavbarItem>
       </NavbarContent>
@@ -109,20 +108,37 @@ const Header = () => {
           </Button>
         </NavbarItem>
         <NavbarItem>
-          <Button
-            color="primary"
-            className={sessionState ? "" : "hidden"}
-            variant="flat"
-            onClick={logout}
-          >
-            Sign Out
-          </Button>
+          {sessionState && (
+            <Dropdown>
+              <DropdownTrigger>
+                <Avatar className="hover:cursor-pointer" src={`${profile}`} />
+              </DropdownTrigger>
+              <DropdownMenu>
+                <DropdownItem key="profile" as={Link} href="/profile">
+                  Profile
+                </DropdownItem>
+                <DropdownItem
+                  key="delete"
+                  className="text-danger"
+                  color="danger"
+                  onClick={logout}
+                >
+                  Logout
+                </DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          )}
         </NavbarItem>
       </NavbarContent>
       <NavbarMenu>
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
-            <Link className="w-full" href={`/${item.replaceAll(' ', '').toLowerCase()}`} size="lg">
+            <Link
+              className="w-full"
+              href={`/${item.replaceAll(" ", "").toLowerCase()}`}
+              size="lg"
+              onClick={navMenuRoute}
+            >
               {item}
             </Link>
           </NavbarMenuItem>
