@@ -23,7 +23,7 @@ export default function login() {
   return (
     <div className="container mx-auto my-[7%]">
       <h1 className="text-4xl text-center my-10">Log In</h1>
-      <form className="flex flex-col items-center gap-5">
+      <form className="flex flex-col items-center gap-5 px-2">
         <Button
           color="primary"
           variant="flat"
