@@ -122,7 +122,7 @@ const Header = () => {
       <NavbarMenu>
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
-            <Link className="w-full" href={`/${item.trim().toLowerCase()}`} size="lg">
+            <Link className="w-full" href={`/${item.replaceAll(' ', '').toLowerCase()}`} size="lg">
               {item}
             </Link>
           </NavbarMenuItem>
