@@ -143,15 +143,6 @@ const Header = () => {
             </Link>
           </NavbarMenuItem>
         ))}
-        {sessionState && (
-          <Link
-            className="w-full text-xl text-danger"
-            href="/login"
-            onClick={logout}
-          >
-            Log Out
-          </Link>
-        )}
       </NavbarMenu>
     </Navbar>
   );
