@@ -29,6 +29,8 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [navSelected, setNavSelected] = useState("");
   const [profile, setProfile] = useState("");
+  const [initials, setInitials] = useState("");
+  const [hasProfilePic, setHasProfilePic] = useState(false);
 
   const menuItems = ["Home", "Blog", "To Do"];
 
@@ -50,19 +52,32 @@ const Header = () => {
       setSessionState(false);
     } else {
       setSessionState(true);
-      console.log(data.session);
     }
 
     setProfile(
       !data.session ? null : data.session.user.user_metadata.avatar_url
     );
+
+    setInitials(
+      !data.session
+        ? null
+        : data.session.user.user_metadata.full_name
+            .toUpperCase()
+            .split(" ")
+            .map((word) => word.charAt(0))
+    );
+
+    setHasProfilePic(
+      !data.session
+        ? null
+        : data.session.user.user_metadata.avatar_url
+        ? true
+        : false
+    );
   }
 
   useEffect(() => {
     setNavSelected(pathName.split("/")[1].toLowerCase());
-  });
-
-  useEffect(() => {
     session();
   }, []);
 
@@ -111,7 +126,11 @@ const Header = () => {
           {sessionState && (
             <Dropdown>
               <DropdownTrigger>
-                <Avatar className="hover:cursor-pointer" src={`${profile}`} />
+                {hasProfilePic ? (
+                  <Avatar className="hover:cursor-pointer" src={`${profile}`} />
+                ) : (
+                  <Avatar className="hover:cursor-pointer" name={initials} />
+                )}
               </DropdownTrigger>
               <DropdownMenu>
                 <DropdownItem key="profile" as={Link} href="/profile">

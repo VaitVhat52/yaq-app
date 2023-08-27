@@ -7,8 +7,10 @@ import Link from "next/link";
 import { Divider } from "@nextui-org/react";
 import { FcGoogle } from "react-icons/fc";
 import { supabase } from "@/client";
+import { useRouter } from "next/navigation";
 
 export default function signup() {
+  const router = useRouter();
   const [nameInput, setNameInput] = useState("");
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
@@ -19,9 +21,9 @@ export default function signup() {
     });
   }
 
-  async function logInWithForm(e) {
+  async function signUpWithForm(e) {
     e.preventDefault();
-    const { data, error } = await supabase.auth.signUp({
+    let { data, error } = await supabase.auth.signUp({
       email: emailInput,
       password: passwordInput,
       options: {
@@ -30,9 +32,7 @@ export default function signup() {
         },
       },
     });
-    setNameInput("");
-    setEmailInput("");
-    setPasswordInput("");
+    router.push("/login");
   }
 
   function handleNameInput(e) {
@@ -50,7 +50,7 @@ export default function signup() {
       <h1 className="text-4xl text-center my-10">Create New Account</h1>
       <form
         className="flex flex-col items-center gap-5 px-2"
-        onSubmit={logInWithForm}
+        onSubmit={signUpWithForm}
       >
         <Button
           color="primary"
