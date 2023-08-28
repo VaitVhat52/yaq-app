@@ -14,6 +14,7 @@ export default function signup() {
   const [nameInput, setNameInput] = useState("");
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   async function googleAuth() {
     const { data, error } = await supabase.auth.signInWithOAuth({
@@ -32,7 +33,8 @@ export default function signup() {
         },
       },
     });
-    router.push("/login");
+    !error ? router.push("/home") : null;
+    !error ? setIsLoading(true) : null;
   }
 
   function handleNameInput(e) {
@@ -90,7 +92,13 @@ export default function signup() {
           onChange={handlePassInput}
         />
 
-        <Button color="primary" href="" className="w-96 text-md" type="submit">
+        <Button
+          color="primary"
+          href=""
+          className="w-96 text-md"
+          type="submit"
+          isLoading={isLoading}
+        >
           Sign Up
         </Button>
         <span>

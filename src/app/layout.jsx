@@ -1,7 +1,6 @@
 import Header from "@/components/Header/Header";
 import "./globals.css";
 import { REM } from "next/font/google";
-import Footer from "@/components/Footer/Footer";
 import { Providers } from "./providers";
 
 const rem = REM({ subsets: ["latin"] });
@@ -18,7 +17,6 @@ export default function RootLayout({ children }) {
         <Providers>
           <Header />
           {children}
-          <Footer />
         </Providers>
       </body>
     </html>

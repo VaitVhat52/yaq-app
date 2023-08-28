@@ -44,14 +44,8 @@ export default function login() {
       email: emailInput,
       password: passwordInput,
     });
-    !error ? null && router.push("/login") : setErrorStatus(true);
-    router.push("/home");
-
-    console.log(data.session);
-  }
-
-  function handleLoginClick() {
-    setIsLoading(true);
+    !error ? router.push("/home") : setErrorStatus(true);
+    !error ? setIsLoading(true) : null;
   }
 
   useEffect(() => {
@@ -99,7 +93,6 @@ export default function login() {
           href="#"
           className="w-96 text-md"
           type="submit"
-          onClick={handleLoginClick}
           isLoading={isLoading}
         >
           Sign In
