@@ -44,7 +44,7 @@ export default function login() {
       email: emailInput,
       password: passwordInput,
     });
-    !error ? router.push("/home") : setErrorStatus(true);
+    !error ? window.location.replace("/home") : setErrorStatus(true);
     !error ? setIsLoading(true) : null;
   }
 

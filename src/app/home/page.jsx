@@ -1,12 +1,15 @@
 "use client";
 
 import { supabase } from "@/client";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 const home = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const pathName = usePathname();
+
   async function session() {
     const { data, error } = await supabase.auth.getSession();
 
@@ -19,7 +22,6 @@ const home = () => {
     session();
   }, []);
 
-  const pathName = usePathname();
   return <div className="text-4xl text-center mt-[20%]">Hello World</div>;
 };
 
