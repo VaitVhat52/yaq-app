@@ -105,13 +105,13 @@ const Header = () => {
       </NavbarContent>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem isActive={navSelected === "/home"}>
-          <Link href="/home">Home</Link>
+          <Link href={sessionState ? "/home" : ""}>Home</Link>
         </NavbarItem>
         <NavbarItem isActive={navSelected === "/blog"}>
-          <Link href="/blog">Blog</Link>
+          <Link href={sessionState ? "/blog" : ""}>Blog</Link>
         </NavbarItem>
         <NavbarItem isActive={navSelected === "/todo"}>
-          <Link href="/todo">To Do</Link>
+          <Link href={sessionState ? "/todo" : ""}>To Do</Link>
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
