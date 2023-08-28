@@ -13,7 +13,7 @@ import {
 import Link from "next/link";
 import { Button } from "@nextui-org/button";
 import { supabase } from "@/client";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import {
   Dropdown,
   DropdownTrigger,
@@ -24,6 +24,7 @@ import {
 
 const Header = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const pathName = usePathname();
   const [sessionState, setSessionState] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -77,7 +78,10 @@ const Header = () => {
   }
 
   useEffect(() => {
-    setNavSelected(pathName.split("/")[1].toLowerCase());
+    setNavSelected(pathName);
+  }, [pathName, searchParams]);
+
+  useEffect(() => {
     session();
   }, []);
 
@@ -100,13 +104,13 @@ const Header = () => {
         </NavbarBrand>
       </NavbarContent>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem isActive={navSelected === "home"}>
+        <NavbarItem isActive={navSelected === "/home"}>
           <Link href="/home">Home</Link>
         </NavbarItem>
-        <NavbarItem isActive={navSelected === "blog"}>
+        <NavbarItem isActive={navSelected === "/blog"}>
           <Link href="/blog">Blog</Link>
         </NavbarItem>
-        <NavbarItem isActive={navSelected === "todo"}>
+        <NavbarItem isActive={navSelected === "/todo"}>
           <Link href="/todo">To Do</Link>
         </NavbarItem>
       </NavbarContent>
