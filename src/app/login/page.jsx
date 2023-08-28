@@ -13,6 +13,7 @@ export default function login() {
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [errorStatus, setErrorStatus] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   async function session() {
@@ -47,6 +48,10 @@ export default function login() {
     router.push("/home");
 
     console.log(data.session);
+  }
+
+  function handleLoginClick() {
+    setIsLoading(true);
   }
 
   useEffect(() => {
@@ -89,7 +94,14 @@ export default function login() {
           value={passwordInput}
           onChange={handlePasswordInput}
         />
-        <Button color="primary" href="#" className="w-96 text-md" type="submit">
+        <Button
+          color="primary"
+          href="#"
+          className="w-96 text-md"
+          type="submit"
+          onClick={handleLoginClick}
+          isLoading={isLoading}
+        >
           Sign In
         </Button>
         <span>
