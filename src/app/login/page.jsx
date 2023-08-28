@@ -46,6 +46,7 @@ export default function login() {
     });
     !error ? window.location.replace("/home") : setErrorStatus(true);
     !error ? setIsLoading(true) : null;
+    !error ? null : setPasswordInput("");
   }
 
   useEffect(() => {
