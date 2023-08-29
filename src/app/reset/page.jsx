@@ -21,7 +21,7 @@ const reset = () => {
     const { data, error } = await supabase.auth.resetPasswordForEmail(
       emailInput,
       {
-        redirectTo: "http://localhost:3000/update-password",
+        redirectTo: "https://yaq-app.vercel.app/update-password",
       }
     );
     error ? setErrorStatus(true) : null;
