@@ -15,9 +15,7 @@ const updatePass = () => {
 
   async function newPassword(e) {
     e.preventDefault();
-    const { data, error } = await supabase.auth.updateUser({
-      password: passwordInput,
-    });
+    await supabase.auth.updateUser({ password: passwordInput });
     router.push("/login");
   }
 
