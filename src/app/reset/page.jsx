@@ -10,6 +10,7 @@ const reset = () => {
   const router = useRouter();
   const [emailInput, setEmailInput] = useState("");
   const [errorStatus, setErrorStatus] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const handleInputChange = (e) => {
     setEmailInput(e.target.value);
@@ -20,10 +21,11 @@ const reset = () => {
     const { data, error } = await supabase.auth.resetPasswordForEmail(
       emailInput,
       {
-        redirectTo: "/update-password",
+        redirectTo: "https://yaq-app.vercel.app/update-password",
       }
     );
-    !error ? router.push("/update-password") : setErrorStatus(true);
+    error ? setErrorStatus(true) : null;
+    setEmailInput("");
   }
 
   return (
@@ -33,7 +35,8 @@ const reset = () => {
         className="flex flex-col items-center gap-5 px-2"
         onSubmit={resetPassword}
       >
-        {errorStatus && <p className="text-danger">Email is not registered</p>}
+        {errorStatus && <p className="text-danger">Email is not registered.</p>}
+        {submitted && <p className="text-success">Please check your email.</p>}
         <Input
           isRequired
           type="email"
