@@ -27,11 +27,6 @@ const updatePass = () => {
         className="flex flex-col items-center gap-5 px-2"
         onSubmit={newPassword}
       >
-        {errorStatus && (
-          <p className="text-danger">
-            There was an error proccessing your request.
-          </p>
-        )}
         <Input
           isRequired
           type="password"
