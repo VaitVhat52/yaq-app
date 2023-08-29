@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 const updatePass = () => {
   const router = useRouter();
   const [passwordInput, setPasswordInput] = useState("");
+  const [errorStatus, setErrorStatus] = useState(false);
 
   function handlePasswordInput(e) {
     setPasswordInput(e.target.value);
@@ -18,6 +19,8 @@ const updatePass = () => {
     const { data, error } = await supabase.auth.updateUser({
       password: passwordInput,
     });
+    setSubmitted(true);
+    error ? setErrorStatus(true) : null;
     router.push("/login");
   }
 
@@ -28,6 +31,11 @@ const updatePass = () => {
         className="flex flex-col items-center gap-5 px-2"
         onSubmit={newPassword}
       >
+        {errorStatus && (
+          <p className="text-danger">
+            There was an error proccessing your request.
+          </p>
+        )}
         <Input
           isRequired
           type="password"
