@@ -94,7 +94,6 @@ export default function signup() {
 
         <Button
           color="primary"
-          href=""
           className="w-96 text-md"
           type="submit"
           isLoading={isLoading}

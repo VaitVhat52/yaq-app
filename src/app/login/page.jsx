@@ -81,6 +81,7 @@ export default function login() {
           value={emailInput}
           onChange={handleEmailInput}
         />
+
         <Input
           isRequired
           type="password"
@@ -89,9 +90,14 @@ export default function login() {
           value={passwordInput}
           onChange={handlePasswordInput}
         />
+        <Link
+          href="/reset"
+          className="hover:underline text-primary text-right w-96 -mt-4"
+        >
+          Forgot Password?
+        </Link>
         <Button
           color="primary"
-          href="#"
           className="w-96 text-md"
           type="submit"
           isLoading={isLoading}
