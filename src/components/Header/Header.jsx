@@ -88,7 +88,6 @@ const Header = () => {
   return (
     <Navbar
       isBordered
-      shouldHideOnScroll
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
     >
