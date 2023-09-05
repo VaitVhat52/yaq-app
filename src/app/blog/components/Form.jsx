@@ -7,6 +7,8 @@ import { Input } from "@nextui-org/input";
 
 const Form = () => {
   const [sessionData, setSessionData] = useState();
+  const [titleInput, setTitleInput] = useState("");
+  const [contentInput, setContentInput] = useState("");
 
   async function session() {
     const { data, error } = await supabase.auth.getSession();
@@ -17,16 +19,21 @@ const Form = () => {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    const { data, error } = await supabase
-      .from("blog_posts")
-      .insert([
-        {
-          user_id: `${sessionData.session.user.id}`,
-          author: `${sessionData.session.user.user_metadata.full_name}`,
-          title: " ",
-          content: " ",
-        },
-      ]);
+    const { data, error } = await supabase.from("blog_posts").insert([
+      {
+        author: `${sessionData.session.user.user_metadata.full_name}`,
+        title: `${titleInput}`,
+        content: `${contentInput}`,
+      },
+    ]);
+  }
+
+  function handleTitleInput(e) {
+    setTitleInput(e.target.value);
+  }
+
+  function handleContentInput(e) {
+    setContentInput(e.target.value);
   }
 
   useEffect(() => {
@@ -35,8 +42,18 @@ const Form = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Input type="text" label="Title" />
-      <Input type="text" label="Content" />
+      <Input
+        type="text"
+        label="Title"
+        value={titleInput}
+        onChange={handleTitleInput}
+      />
+      <Input
+        type="text"
+        label="Content"
+        value={contentInput}
+        onChange={handleContentInput}
+      />
       <Button type="submit">Submit</Button>
     </form>
   );
