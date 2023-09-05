@@ -1,8 +1,10 @@
 "use client";
 
 import { supabase } from "@/client";
+import { Button } from "@nextui-org/button";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
+import Form from "./components/Form";
 
 const blog = () => {
   const router = useRouter();
