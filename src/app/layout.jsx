@@ -2,6 +2,7 @@ import Header from "@/components/Header/Header";
 import "./globals.css";
 import { REM } from "next/font/google";
 import { Providers } from "./providers";
+import { Analytics } from "@vercel/analytics/react";
 
 const rem = REM({ subsets: ["latin"] });
 
@@ -17,6 +18,7 @@ export default function RootLayout({ children }) {
         <Providers>
           <Header />
           {children}
+          <Analytics />
         </Providers>
       </body>
     </html>
