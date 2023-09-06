@@ -8,7 +8,7 @@ const PostItem = () => {
       <Card isHoverable={true} className="px-4 py-2">
         <CardHeader className=" flex-col items-start gap-5">
           <h1 className="text-3xl">
-            REally super duper specially long title for a title
+            Really super duper specially long title for a title
           </h1>
           <span className="flex items-center gap-3">
             <Avatar isBordered size="sm" name="A" />
