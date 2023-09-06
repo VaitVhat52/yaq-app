@@ -10,7 +10,7 @@ const PostItem = () => {
           <h1 className="text-3xl">
             REally super duper specially long title for a title
           </h1>
-          <span className="flex items-center gap-2">
+          <span className="flex items-center gap-3">
             <Avatar isBordered size="sm" name="A" />
             <p>Author</p>
           </span>
