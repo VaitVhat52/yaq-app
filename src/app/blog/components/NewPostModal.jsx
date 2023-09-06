@@ -28,7 +28,12 @@ const NewPostModal = () => {
       >
         <HiPlus size={"20px"} /> New Post
       </Button>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center">
+      <Modal
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        isDismissable={false}
+        placement="top-center"
+      >
         <ModalContent>
           {(onClose) => (
             <>
