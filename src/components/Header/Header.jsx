@@ -128,14 +128,14 @@ const Header = () => {
                 {hasProfilePic ? (
                   <Avatar
                     isBordered
-                    size="md"
+                    size="sm"
                     className="hover:cursor-pointer"
                     src={`${profile}`}
                   />
                 ) : (
                   <Avatar
                     isBordered
-                    size="md"
+                    size="sm"
                     className="hover:cursor-pointer"
                     name={initials}
                   />
