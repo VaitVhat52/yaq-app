@@ -86,11 +86,7 @@ const Header = () => {
   }, []);
 
   return (
-    <Navbar
-      isBordered
-      isMenuOpen={isMenuOpen}
-      onMenuOpenChange={setIsMenuOpen}
-    >
+    <Navbar isBordered isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen}>
       <NavbarMenuToggle
         aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         className="sm:hidden"
@@ -130,9 +126,17 @@ const Header = () => {
             <Dropdown>
               <DropdownTrigger>
                 {hasProfilePic ? (
-                  <Avatar className="hover:cursor-pointer" src={`${profile}`} />
+                  <Avatar
+                    isBordered
+                    className="hover:cursor-pointer"
+                    src={`${profile}`}
+                  />
                 ) : (
-                  <Avatar className="hover:cursor-pointer" name={initials} />
+                  <Avatar
+                    isBordered
+                    className="hover:cursor-pointer"
+                    name={initials}
+                  />
                 )}
               </DropdownTrigger>
               <DropdownMenu>
