@@ -3,7 +3,6 @@ import "./globals.css";
 import { REM } from "next/font/google";
 import { Providers } from "./providers";
 import { Analytics } from "@vercel/analytics/react";
-import Footer from "@/components/Footer/Footer";
 
 const rem = REM({ subsets: ["latin"] });
 
@@ -19,7 +18,6 @@ export default function RootLayout({ children }) {
         <Providers>
           <Header />
           {children}
-          <Footer />
           <Analytics />
         </Providers>
       </body>

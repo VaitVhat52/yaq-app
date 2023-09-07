@@ -51,6 +51,8 @@ const NewPostModal = () => {
         link: `${linkInput}`,
       },
     ]);
+
+    !error ? window.location.replace("/blog") : null;
   }
 
   async function session() {
@@ -108,10 +110,17 @@ const NewPostModal = () => {
                   placeholder="Write a fancy shmancy body to your post"
                   className="col-span-12 md:col-span-6 mb-6 md:mb-0"
                 />
-                <label htmlFor="fileInput" className="-mt-5 text-small">
+                <label
+                  htmlFor="fileInput"
+                  className="sm:-mt-2 -mt-5 text-small"
+                >
                   Choose Cover Image
                 </label>
-                <input name="fileInput" type="file" />
+                <input
+                  name="fileInput"
+                  type="file"
+                  className="file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary file:foreground file:hover:cursor-pointer"
+                />
                 <Divider className="my-2" />
                 <Input
                   type="text"

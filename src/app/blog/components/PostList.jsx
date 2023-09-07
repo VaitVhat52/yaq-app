@@ -20,7 +20,7 @@ const PostList = () => {
   async function fetchBlogPosts() {
     const { data, error } = await supabase.from("blog_posts").select();
     setPosts(data);
-    console.log(error);
+    console.log(data, error);
   }
 
   useEffect(() => {
@@ -30,18 +30,20 @@ const PostList = () => {
 
   return (
     <div className="flex flex-col gap-7 mb-7">
-      {posts?.length() < 1 ? (
-        <p>No Posts Found</p>
+      {posts?.length === 0 ? (
+        <p className="text-center text-danger">No Posts Found</p>
       ) : (
         posts?.map((post) => {
-          <PostItem
-            key={post.id}
-            title={post?.title}
-            author={post?.author}
-            content={post?.content}
-            avatarUrl={post?.authorImageLink}
-            link={post?.link}
-          />;
+          return (
+            <PostItem
+              key={post?.id}
+              title={post?.title}
+              author={post?.author}
+              content={post?.content}
+              avatarUrl={post?.authorImageLink}
+              link={post?.link}
+            />
+          );
         })
       )}
     </div>
