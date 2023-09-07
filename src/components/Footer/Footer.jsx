@@ -8,7 +8,6 @@ const Footer = () => {
       <p className="fixed bottom-5 w-full text-center">
         &copy; {new Date().getFullYear()} Yaq Kakda
       </p>
-      ;
     </div>
   );
 };
