@@ -1,6 +1,7 @@
 import { Avatar, Card, CardBody, CardHeader } from "@nextui-org/react";
 import Link from "next/link";
 import React from "react";
+import EllipsisText from "react-ellipsis-text";
 
 const PostItem = (props) => {
   const initials = props.author
@@ -23,7 +24,7 @@ const PostItem = (props) => {
           </span>
         </CardHeader>
         <CardBody className="py-2 max-h-20 overflow-hidden">
-          <p>{props.content}</p>
+          <EllipsisText text={props.content} length={"300"} />
         </CardBody>
       </Card>
     </Link>

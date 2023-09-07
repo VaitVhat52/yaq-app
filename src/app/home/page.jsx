@@ -7,8 +7,7 @@ import React, { useEffect, useState } from "react";
 
 const home = () => {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const pathName = usePathname();
+  const [name, setName] = useState();
 
   async function session() {
     const { data, error } = await supabase.auth.getSession();
@@ -16,13 +15,15 @@ const home = () => {
     if (data.session === null) {
       router.push("/login");
     }
+
+    setName(data.session.user.user_metadata.full_name);
   }
 
   useEffect(() => {
     session();
   }, []);
 
-  return <div className="text-4xl text-center mt-[20%]">Hello World</div>;
+  return <div className="text-4xl text-center mt-[20%]">Hello, {name}</div>;
 };
 
 export default home;

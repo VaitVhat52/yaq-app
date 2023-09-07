@@ -6,6 +6,7 @@ import { Input } from "@nextui-org/input";
 import Link from "next/link";
 import { Divider } from "@nextui-org/react";
 import { FcGoogle } from "react-icons/fc";
+import { AiFillGithub } from "react-icons/ai";
 import { supabase } from "@/client";
 import { useRouter } from "next/navigation";
 
@@ -19,6 +20,12 @@ const Form = () => {
   async function googleAuth() {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
+    });
+  }
+
+  async function githubAuth() {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "github",
     });
   }
 
@@ -60,6 +67,15 @@ const Form = () => {
         onClick={googleAuth}
       >
         Sign Up with Google
+      </Button>
+      <Button
+        color="primary"
+        variant="flat"
+        className="w-96 text-md"
+        startContent={<AiFillGithub className="text-xl" />}
+        onClick={githubAuth}
+      >
+        Sign Up with GitHub
       </Button>
       <Divider className="w-96" />
       <Input
