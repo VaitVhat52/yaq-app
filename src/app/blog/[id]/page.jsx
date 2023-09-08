@@ -2,9 +2,11 @@
 
 import { supabase } from "@/client";
 import { Avatar } from "@nextui-org/react";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const page = ({ params }) => {
+  const router = useRouter();
   const [postData, setPostData] = useState([]);
   const initials = postData?.[0]?.author
     .toUpperCase()
@@ -17,6 +19,8 @@ const page = ({ params }) => {
       .select("*")
       .eq("link", `${params.id}`);
     setPostData(data);
+    console.log(data);
+    data.length == 0 ? router.push("/404") : null;
   }
 
   useEffect(() => {
