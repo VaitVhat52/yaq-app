@@ -1,6 +1,6 @@
 import React from "react";
-import PostList from "./components/PostList";
-import NewPostModal from "./components/NewPostModal";
+import PostList from "./components/PostList/PostList";
+import NewPostModal from "./components/NewPostModal/NewPostModal";
 
 const blog = () => {
   return (

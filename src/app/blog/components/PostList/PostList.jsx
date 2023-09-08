@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import PostItem from "./PostItem";
+import PostItem from "../PostItem/PostItem";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/client";
 

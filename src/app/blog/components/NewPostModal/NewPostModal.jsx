@@ -106,7 +106,7 @@ const NewPostModal = () => {
                   value={contentInput}
                   onChange={handleContentInput}
                   placeholder="Write a fancy shmancy body to your post"
-                  className="col-span-12 md:col-span-6 mb-6 md:mb-0"
+                  className={`col-span-12 md:col-span-6 mb-6 md:mb-0`}
                 />
                 {/* <label
                   htmlFor="fileInput"
