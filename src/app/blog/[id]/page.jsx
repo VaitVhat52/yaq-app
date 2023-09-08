@@ -43,7 +43,7 @@ const page = ({ params }) => {
         )}
         <p>{postData?.[0]?.author}</p>
       </span>
-      <p>{postData?.[0]?.content}</p>
+      <p className="whitespace-pre-wrap mb-10">{postData?.[0]?.content}</p>
     </div>
   );
 };
