@@ -1,6 +1,9 @@
-import { Avatar, Card, CardBody, CardHeader } from "@nextui-org/react";
+"use client";
+
+import { supabase } from "@/client";
+import { Avatar, Button, Card, CardBody, CardHeader } from "@nextui-org/react";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import EllipsisText from "react-ellipsis-text";
 
 const PostItem = (props) => {
@@ -24,7 +27,7 @@ const PostItem = (props) => {
           </span>
         </CardHeader>
         <CardBody className="py-2 max-h-20 overflow-hidden">
-          <EllipsisText text={props.content} length={"300"} />
+          <p>{props.content}</p>
         </CardBody>
       </Card>
     </Link>

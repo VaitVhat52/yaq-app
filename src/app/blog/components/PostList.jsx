@@ -20,7 +20,6 @@ const PostList = () => {
   async function fetchBlogPosts() {
     const { data, error } = await supabase.from("blog_posts").select();
     setPosts(data);
-    console.log(data, error);
   }
 
   useEffect(() => {

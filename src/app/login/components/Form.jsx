@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
 import Link from "next/link";
@@ -15,7 +15,11 @@ const Form = () => {
   const [passwordInput, setPasswordInput] = useState("");
   const [errorStatus, setErrorStatus] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [emailValue, setEmailValue] = useState("");
   const router = useRouter();
+
+  const validateEmail = (emailValue) =>
+    emailValue?.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i);
 
   async function session() {
     const { data, error } = await supabase.auth.getSession();
@@ -24,6 +28,12 @@ const Form = () => {
       router.push("/");
     }
   }
+
+  const validationState = useMemo(() => {
+    if (emailValue === "") return undefined;
+
+    return validateEmail(emailValue) ? "valid" : "invalid";
+  }, [emailValue]);
 
   function handleEmailInput(e) {
     setEmailInput(e.target.value);
@@ -51,6 +61,9 @@ const Form = () => {
       email: emailInput,
       password: passwordInput,
     });
+
+    setEmailValue(e.target.value);
+
     !error ? window.location.replace("/home") : setErrorStatus(true);
     !error ? setIsLoading(true) : null;
     !error ? null : setPasswordInput("");
@@ -92,6 +105,11 @@ const Form = () => {
         type="email"
         label="Email"
         className="w-96"
+        color={validationState === "invalid" ? "danger" : ""}
+        errorMessage={
+          validationState === "invalid" && "Please enter a valid email"
+        }
+        validationState={validationState}
         value={emailInput}
         onChange={handleEmailInput}
       />

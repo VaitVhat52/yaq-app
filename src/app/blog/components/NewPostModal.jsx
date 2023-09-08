@@ -25,10 +25,7 @@ const NewPostModal = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   function handleLinkInput(e) {
-    setLinkInput(e.target.value);
-    if (linkInput == "/") {
-      return;
-    }
+    setLinkInput(e.target.value.replace(/\s/g, "").replace("/", ""));
   }
 
   function handleTitleInput(e) {
@@ -77,6 +74,7 @@ const NewPostModal = () => {
       >
         <HiPlus size={"20px"} /> New Post
       </Button>
+
       <Modal
         isOpen={isOpen}
         onOpenChange={onOpenChange}
@@ -137,7 +135,12 @@ const NewPostModal = () => {
                 <Button color="danger" variant="flat" onPress={onClose}>
                   Close
                 </Button>
-                <Button color="primary" onPress={onClose} onClick={createPost}>
+                <Button
+                  color="primary"
+                  type="submit"
+                  onPress={onClose}
+                  onClick={createPost}
+                >
                   Submit
                 </Button>
               </ModalFooter>
