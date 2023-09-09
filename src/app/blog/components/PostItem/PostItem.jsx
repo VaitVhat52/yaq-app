@@ -24,7 +24,7 @@ const PostItem = (props) => {
           </span>
         </CardHeader>
         <CardBody className="py-2 max-h-20 overflow-hidden">
-          <EllipsisText text={props.content} length={"280"} />
+          <EllipsisText text={props.content} length={280} />
         </CardBody>
       </Card>
     </Link>

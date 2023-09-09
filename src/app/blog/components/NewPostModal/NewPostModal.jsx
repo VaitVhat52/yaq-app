@@ -22,6 +22,7 @@ const NewPostModal = () => {
   const [contentInput, setContentInput] = useState("");
   const [profile, setProfile] = useState("");
   const [name, setName] = useState("");
+  const [error, setError] = useState();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   function handleLinkInput(e) {
@@ -49,7 +50,8 @@ const NewPostModal = () => {
       },
     ]);
 
-    !error ? window.location.replace("/blog") : null;
+    !error ? window.location.replace("/blog") : setError(error);
+    console.log(error);
   }
 
   async function session() {
@@ -120,6 +122,11 @@ const NewPostModal = () => {
                   className="file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary file:foreground file:hover:cursor-pointer"
                 /> */}
                 <Divider className="my-2" />
+                {error?.code === "23505" && (
+                  <p className="text-danger">
+                    This link already exists. Please try another link.
+                  </p>
+                )}
                 <Input
                   type="text"
                   label="Link"
