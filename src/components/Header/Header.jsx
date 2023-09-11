@@ -94,7 +94,7 @@ const Header = () => {
       <NavbarContent>
         <NavbarBrand>
           <Link className="font-bold text-inherit" href="/">
-            Yaq's App Thingy
+            Yaq App
           </Link>
         </NavbarBrand>
       </NavbarContent>
