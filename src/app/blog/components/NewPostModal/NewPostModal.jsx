@@ -14,6 +14,7 @@ import {
 } from "@nextui-org/react";
 import { HiPlus } from "react-icons/hi";
 import { Button } from "@nextui-org/button";
+import { Link } from "@nextui-org/react";
 import { supabase } from "@/client";
 
 const NewPostModal = () => {
@@ -71,8 +72,17 @@ const NewPostModal = () => {
       <Button
         color="primary"
         size="sm"
-        className="sm:w-auto sm:h-7 h-9 w-full"
+        className="sm:w-auto sm:h-7 h-9 w-full hidden sm:flex"
         onPress={onOpen}
+      >
+        <HiPlus size={"20px"} /> New Post
+      </Button>
+      <Button
+        color="primary"
+        size="sm"
+        href="/blog/new"
+        as={Link}
+        className="sm:w-auto w-full sm:h-7 h-9 flex sm:hidden"
       >
         <HiPlus size={"20px"} /> New Post
       </Button>
