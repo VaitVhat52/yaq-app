@@ -39,7 +39,7 @@ const Form = () => {
       },
     ]);
 
-    !error ? router.push("/blog") : null;
+    !error ? router.push("/blog") : setError(error);
   }
 
   async function session() {
@@ -60,6 +60,11 @@ const Form = () => {
 
   return (
     <form onSubmit={createPost} className="flex flex-col mt-5 sm:gap-5 gap-3 ">
+      {error?.code === "23514" && (
+        <p className="text-danger text-center">
+          Make sure none of the inputs are empty.
+        </p>
+      )}
       <Input
         autoFocus
         label="Title"
@@ -87,7 +92,7 @@ const Form = () => {
   /> */}
       <Divider className="my-1" />
       {error?.code === "23505" && (
-        <p className="text-danger">
+        <p className="text-danger text-center">
           This link already exists. Please try another link.
         </p>
       )}

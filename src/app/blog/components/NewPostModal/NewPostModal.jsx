@@ -101,6 +101,11 @@ const NewPostModal = () => {
                 New Post
               </ModalHeader>
               <ModalBody>
+                {error?.code === "23514" && (
+                  <p className="text-danger">
+                    Make sure none of the inputs are empty.
+                  </p>
+                )}
                 <Input
                   autoFocus
                   label="Title"
