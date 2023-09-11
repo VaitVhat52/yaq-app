@@ -12,9 +12,9 @@ import {
   Textarea,
   Divider,
 } from "@nextui-org/react";
+import Link from "next/link";
 import { HiPlus } from "react-icons/hi";
 import { Button } from "@nextui-org/button";
-import { Link } from "@nextui-org/react";
 import { supabase } from "@/client";
 
 const NewPostModal = () => {
@@ -77,15 +77,14 @@ const NewPostModal = () => {
       >
         <HiPlus size={"20px"} /> New Post
       </Button>
-      <Button
+      <Link
         color="primary"
         size="sm"
         href="/blog/new"
-        as={Link}
-        className="sm:w-auto w-full sm:h-7 h-9 flex sm:hidden"
+        className="sm:w-auto w-full sm:h-7 h-9 flex items-center gap-2 sm:hidden bg-primary text-white pl-[40%] rounded-lg"
       >
         <HiPlus size={"20px"} /> New Post
-      </Button>
+      </Link>
 
       <Modal
         isOpen={isOpen}
