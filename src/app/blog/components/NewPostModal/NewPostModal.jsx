@@ -143,7 +143,7 @@ const NewPostModal = () => {
                 )}
                 <Input
                   type="text"
-                  label="Link"
+                  label="Custom Link"
                   variant="bordered"
                   labelPlacement="outside"
                   value={linkInput}
