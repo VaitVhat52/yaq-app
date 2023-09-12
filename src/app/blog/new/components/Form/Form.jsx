@@ -98,7 +98,7 @@ const Form = () => {
       )}
       <Input
         type="text"
-        label="Link"
+        label="Custom Link"
         labelPlacement="outside"
         value={linkInput}
         onChange={handleLinkInput}
