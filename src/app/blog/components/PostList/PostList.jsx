@@ -32,7 +32,7 @@ const PostList = () => {
       {posts?.length === 0 ? (
         <p className="text-center text-danger">No Posts Found</p>
       ) : (
-        posts?.map((post) => {
+        posts?.reverse().map((post) => {
           return (
             <PostItem
               key={post?.id}

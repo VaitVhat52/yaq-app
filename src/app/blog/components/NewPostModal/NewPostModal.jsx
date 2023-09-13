@@ -81,7 +81,7 @@ const NewPostModal = () => {
         color="primary"
         size="sm"
         href="/blog/new"
-        className="sm:w-auto w-full sm:h-7 h-9 flex items-center gap-2 sm:hidden bg-primary text-white pl-[40%] rounded-lg"
+        className="sm:w-auto w-full sm:h-7 h-9 flex items-center justify-center gap-2 sm:hidden bg-primary text-white rounded-lg"
       >
         <HiPlus size={"20px"} /> New Post
       </Link>
@@ -156,12 +156,7 @@ const NewPostModal = () => {
                 <Button color="danger" variant="flat" onPress={onClose}>
                   Close
                 </Button>
-                <Button
-                  color="primary"
-                  type="submit"
-                  onPress={onClose}
-                  onClick={createPost}
-                >
+                <Button color="primary" type="submit" onClick={createPost}>
                   Submit
                 </Button>
               </ModalFooter>
