@@ -18,7 +18,7 @@ const PostItem = (props) => {
             {props.avatarUrl === "undefined" ? (
               <Avatar isBordered size="sm" name={initials} />
             ) : (
-              <Avatar isBordered fall size="sm" src={props.avatarUrl} />
+              <Avatar isBordered size="sm" src={props.avatarUrl} />
             )}
             <p>{props.author}</p>
           </span>
