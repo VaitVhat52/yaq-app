@@ -4,36 +4,29 @@ import React, { useEffect, useState } from "react";
 import PostItem from "../PostItem/PostItem";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/client";
+import { useSession } from "@supabase/auth-helpers-react";
 
 const PostList = () => {
   const [posts, setPosts] = useState([]);
-  const [userid, setUserId] = useState("");
   const router = useRouter();
 
   async function session() {
     const { data, error } = await supabase.auth.getSession();
 
-    setUserId(data?.session.user.id);
-
-    if (data.session === null) {
+    if (!data.session) {
       router.push("/login");
     }
-  }
 
-  async function fetchBlogPosts() {
-    const { data, error } = await supabase
+    const { data: postData, error: postError } = await supabase
       .from("blog_posts")
-      .select()
-      .eq("user_id", `${userid}`);
+      .select("*")
+      .eq("user_id", data.session.user.id);
 
-    setPosts(data);
-    console.log(data);
-    console.log(userid);
+    setPosts(postData);
   }
 
   useEffect(() => {
     session();
-    fetchBlogPosts();
   }, []);
 
   return (

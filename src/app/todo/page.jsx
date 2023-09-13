@@ -9,7 +9,7 @@ const todo = () => {
   async function session() {
     const { data, error } = await supabase.auth.getSession();
 
-    if (data.session === null) {
+    if (!data.session) {
       router.push("/login");
     }
   }

@@ -49,7 +49,7 @@ const Header = () => {
   async function session() {
     const { data, error } = await supabase.auth.getSession();
 
-    if (data.session === null) {
+    if (!data.session) {
       setSessionState(false);
     } else {
       setSessionState(true);
