@@ -16,8 +16,9 @@ const Identity = () => {
     }
 
     setProfile(data.session.user.user_metadata.avatar_url);
-
     setName(data.session.user.user_metadata.full_name);
+
+    console.log(data);
   }
 
   useEffect(() => {

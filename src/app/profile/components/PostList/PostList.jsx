@@ -6,11 +6,14 @@ import { useRouter } from "next/navigation";
 import { supabase } from "@/client";
 
 const PostList = () => {
-  const [posts, setPosts] = useState();
+  const [posts, setPosts] = useState([]);
+  const [userid, setUserId] = useState("");
   const router = useRouter();
 
   async function session() {
     const { data, error } = await supabase.auth.getSession();
+
+    setUserId(data?.session.user.id);
 
     if (data.session === null) {
       router.push("/login");
@@ -21,8 +24,11 @@ const PostList = () => {
     const { data, error } = await supabase
       .from("blog_posts")
       .select()
-      .eq("userId", `${params.id}`);
+      .eq("user_id", `${userid}`);
+
     setPosts(data);
+    console.log(data);
+    console.log(userid);
   }
 
   useEffect(() => {
