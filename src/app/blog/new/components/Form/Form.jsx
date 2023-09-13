@@ -15,7 +15,7 @@ const Form = () => {
   const [error, setError] = useState();
 
   function handleLinkInput(e) {
-    setLinkInput(e.target.value.replace(/\s/g, "").replace("/", ""));
+    setLinkInput(e.target.value.replace(/[^a-zA-Z0-9]/g, ""));
   }
 
   function handleTitleInput(e) {
