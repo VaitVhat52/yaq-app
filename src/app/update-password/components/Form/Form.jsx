@@ -4,6 +4,7 @@ import { Input } from "@nextui-org/input";
 import { Button } from "@nextui-org/button";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import { supabase } from "@/client";
 
 const Form = () => {
   const router = useRouter();

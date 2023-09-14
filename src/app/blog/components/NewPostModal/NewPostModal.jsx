@@ -80,7 +80,7 @@ const NewPostModal = () => {
       <Link
         color="primary"
         size="sm"
-        href="/blog/new"
+        href="/blog/new-post"
         className="sm:w-auto w-full sm:h-7 h-9 flex items-center justify-center gap-2 sm:hidden bg-primary text-white rounded-lg"
       >
         <HiPlus size={"20px"} /> New Post
