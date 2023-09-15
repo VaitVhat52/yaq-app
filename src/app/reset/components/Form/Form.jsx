@@ -24,7 +24,7 @@ const Form = () => {
         redirectTo: "https://yaq-app.vercel.app/update-password",
       }
     );
-    error ? setErrorStatus(true) : null;
+    error ? setErrorStatus(true) : setSubmitted(true);
     setEmailInput("");
   }
 
@@ -33,8 +33,12 @@ const Form = () => {
       className="flex flex-col items-center gap-5 px-2"
       onSubmit={resetPassword}
     >
-      {errorStatus && <p className="text-danger">Email is not registered.</p>}
-      {submitted && <p className="text-success">Please check your email.</p>}
+      {errorStatus && (
+        <p className="text-danger text-center">Email is not registered.</p>
+      )}
+      {submitted && (
+        <p className="text-success text-center">Please check your email.</p>
+      )}
       <Input
         isRequired
         type="email"

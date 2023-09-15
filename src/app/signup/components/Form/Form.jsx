@@ -16,6 +16,7 @@ const Form = () => {
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(false);
 
   async function googleAuth() {
     const { data, error } = await supabase.auth.signInWithOAuth({
@@ -40,8 +41,8 @@ const Form = () => {
         },
       },
     });
-    !error ? router.push("/home") : null;
     !error ? setIsLoading(true) : null;
+    !error ? setSubmitStatus(true) : null;
   }
 
   function handleNameInput(e) {
@@ -78,6 +79,9 @@ const Form = () => {
         Sign Up with GitHub
       </Button>
       <Divider className="w-96" />
+      {submitStatus && (
+        <p className="text-center text-success">Please Check your Email</p>
+      )}
       <Input
         isRequired
         type="text"
