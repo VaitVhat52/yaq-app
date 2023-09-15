@@ -1,7 +1,7 @@
 "use client";
 
 import { supabase } from "@/client";
-import { Button, Input } from "@nextui-org/react";
+import { Avatar, Button, Input } from "@nextui-org/react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { FaEdit } from "react-icons/fa";
@@ -12,6 +12,11 @@ const Identity = () => {
   const [nameInput, setNameInput] = useState(name);
   const [editing, setEditing] = useState(false);
 
+  const initials = name
+    .toUpperCase()
+    .split(" ")
+    .map((word) => word.charAt(0));
+
   async function session() {
     const { data, error } = await supabase.auth.getSession();
 
@@ -20,26 +25,41 @@ const Identity = () => {
     }
 
     setProfile(data.session.user.user_metadata.avatar_url);
+    console.log(profile);
     setName(data.session.user.user_metadata.full_name);
+  }
+
+  function handleEdit() {
+    setEditing(true);
+  }
+
+  function cancelEdit() {
+    setEditing(false);
+  }
+
+  function handleNameInput(e) {
+    setNameInput(e.target.value);
+  }
+
+  async function updateName(e) {
+    e.preventDefault();
+    const { data, error } = await supabase.auth.updateUser({
+      data: { full_name: nameInput },
+    });
+    !error ? setEditing(false) : console.log(error);
   }
 
   useEffect(() => {
     session();
   });
 
-  function handleEdit() {
-    setEditing(true);
-  }
-
   return (
     <div className="flex flex-col justify-center items-center">
-      <Image
-        src={`${profile}`}
-        width={100}
-        height={100}
-        alt="Profile Picture"
-        className="rounded-full mb-5"
-      />
+      {profile === undefined ? (
+        <Avatar name={initials} className="w-28 h-28 text-3xl mb-5" />
+      ) : (
+        <Avatar src={profile} className="w-28 h-28 mb-5" />
+      )}
       <span className="inline whitespace-nowrap">
         <h1 className="text-4xl text-center leading-normal">
           Welcome,
@@ -48,15 +68,25 @@ const Identity = () => {
             <> {name}</>
           ) : (
             <>
-              <Input
-                placeholder={name}
-                isClearable
-                size="lg"
-                className="-mb-7 mt-7"
-              />
-              <Button className="mt-10" color="danger">
-                Cancel
-              </Button>
+              <form className="mt-6 -mb-10" onSubmit={updateName}>
+                <Input
+                  isClearable
+                  placeholder={name}
+                  size="lg"
+                  className="-mb-5"
+                  value={nameInput}
+                  onChange={handleNameInput}
+                  onClear={() => setNameInput("")}
+                />
+                <span className="flex justify-center gap-3">
+                  <Button className="mt-10" color="danger" onClick={cancelEdit}>
+                    Cancel
+                  </Button>
+                  <Button className="mt-10" color="primary" type="submit">
+                    Submit
+                  </Button>
+                </span>
+              </form>
             </>
           )}
           &nbsp;

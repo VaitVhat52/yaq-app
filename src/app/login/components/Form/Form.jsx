@@ -29,12 +29,6 @@ const Form = () => {
     }
   }
 
-  const validationState = useMemo(() => {
-    if (emailValue === "") return undefined;
-
-    return validateEmail(emailValue) ? "valid" : "invalid";
-  }, [emailValue]);
-
   function handleEmailInput(e) {
     setEmailInput(e.target.value);
   }
@@ -105,11 +99,6 @@ const Form = () => {
         type="email"
         label="Email"
         className="w-96"
-        color={validationState === "invalid" ? "danger" : ""}
-        errorMessage={
-          validationState === "invalid" && "Please enter a valid email"
-        }
-        validationState={validationState}
         value={emailInput}
         onChange={handleEmailInput}
       />
