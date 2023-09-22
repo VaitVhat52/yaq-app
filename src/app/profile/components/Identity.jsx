@@ -2,20 +2,18 @@
 
 import { supabase } from "@/client";
 import { Avatar, Button, Input } from "@nextui-org/react";
-import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { FaEdit } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 const Identity = () => {
   const [profile, setProfile] = useState("");
   const [name, setName] = useState("");
   const [nameInput, setNameInput] = useState(name);
   const [editing, setEditing] = useState(false);
+  const [initials, setInitials] = useState("");
 
-  const initials = name
-    .toUpperCase()
-    .split(" ")
-    .map((word) => word.charAt(0));
+  const router = useRouter();
 
   async function session() {
     const { data, error } = await supabase.auth.getSession();
@@ -24,9 +22,16 @@ const Identity = () => {
       router.push("/login");
     }
 
-    setProfile(data.session.user.user_metadata.avatar_url);
+    setProfile(data.session?.user.user_metadata.avatar_url);
     console.log(profile);
-    setName(data.session.user.user_metadata.full_name);
+    setName(data.session?.user.user_metadata.full_name);
+
+    setInitials(
+      name
+        ?.toUpperCase()
+        .split(" ")
+        .map((word) => word.charAt(0))
+    );
   }
 
   function handleEdit() {

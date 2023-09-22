@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import PostItem from "../PostItem/PostItem";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/client";
-import { useSession } from "@supabase/auth-helpers-react";
 
 const PostList = () => {
   const [posts, setPosts] = useState([]);
@@ -20,7 +19,7 @@ const PostList = () => {
     const { data: postData, error: postError } = await supabase
       .from("blog_posts")
       .select("*")
-      .eq("user_id", data.session.user.id);
+      .eq("user_id", data?.session?.user.id);
 
     setPosts(postData);
   }

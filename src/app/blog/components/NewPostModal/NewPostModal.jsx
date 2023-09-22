@@ -58,9 +58,9 @@ const NewPostModal = () => {
   async function session() {
     const { data, error } = await supabase.auth.getSession();
 
-    setProfile(data.session.user.user_metadata.avatar_url);
+    setProfile(data.session?.user.user_metadata.avatar_url);
 
-    setName(data.session.user.user_metadata.full_name);
+    setName(data.session?.user.user_metadata.full_name);
   }
 
   useEffect(() => {
