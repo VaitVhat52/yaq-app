@@ -3,7 +3,7 @@
 import { supabase } from "@/client";
 import { Avatar, Button, Input } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
-import { FaEdit } from "react-icons/fa";
+import { AiOutlineEdit } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 
 const Identity = () => {
@@ -23,7 +23,6 @@ const Identity = () => {
     }
 
     setProfile(data.session?.user.user_metadata.avatar_url);
-    console.log(profile);
     setName(data.session?.user.user_metadata.full_name);
 
     setInitials(
@@ -56,7 +55,7 @@ const Identity = () => {
 
   useEffect(() => {
     session();
-  });
+  }, []);
 
   return (
     <div className="flex flex-col justify-center items-center">
@@ -97,7 +96,11 @@ const Identity = () => {
           &nbsp;
           {!editing && (
             <button onClick={handleEdit} className="cursor-pointer">
-              <FaEdit className="inline align-middle" size={15} />
+              <AiOutlineEdit
+                className="inline align-middle"
+                size={20}
+                color="#006FEE"
+              />
             </button>
           )}
         </h1>
