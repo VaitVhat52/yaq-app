@@ -16,14 +16,14 @@ const PostItem = (props) => {
       <CardHeader className=" flex-col items-start gap-5">
         <div className="w-full flex items-center justify-between">
           <h1 className="text-3xl">{props.title}</h1>
-          <span className="flex items-center gap-3">
+          {/* <span className="flex items-center gap-3">
             <button>
               <AiOutlineEdit size={25} color="#006FEE" />
             </button>
             <button className="cursor-pointer">
               <RxCross2 size={30} color="red" />
             </button>
-          </span>
+          </span> */}
         </div>
         <div className="flex items-center gap-3">
           {props.avatarUrl === "undefined" ? (
