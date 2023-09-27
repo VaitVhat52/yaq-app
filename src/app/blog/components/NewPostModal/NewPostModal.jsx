@@ -89,7 +89,8 @@ const NewPostModal = () => {
       <Modal
         isOpen={isOpen}
         onOpenChange={onOpenChange}
-        isDismissable={false}
+        backdrop="blur"
+        isDismissable={true}
         placement="top-center"
         className="sm:mx-auto m-5"
       >
