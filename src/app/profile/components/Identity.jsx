@@ -1,12 +1,12 @@
 "use client";
 
 import { supabase } from "@/client";
-import { Avatar, Button, Input } from "@nextui-org/react";
+import { Avatar, Button, Input, Spinner } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 import { AiOutlineEdit } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 
-const Identity = () => {
+const Identity = ({ name: name2 }) => {
   const [profile, setProfile] = useState("");
   const [name, setName] = useState("");
   const [nameInput, setNameInput] = useState(name);
@@ -57,9 +57,12 @@ const Identity = () => {
     session();
   }, []);
 
+  if (profile === "" || name === "")
+    return <Spinner size="lg" className="mx-[10vw]" />;
+
   return (
     <div className="flex flex-col justify-center items-center">
-      {profile === undefined ? (
+      {profile === "" ? (
         <Avatar name={initials} className="w-28 h-28 text-3xl mb-5" />
       ) : (
         <Avatar src={profile} className="w-28 h-28 mb-5" />
